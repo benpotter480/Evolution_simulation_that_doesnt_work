@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://simulation.gd" type="Script" id=1]
+[ext_resource path="res://creature.tscn" type="PackedScene" id=2]
+[ext_resource path="res://food.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sim_grass.png" type="Texture" id=4]
+
+[sub_resource type="LineShape2D" id=1]
+
+[node name="simulation" type="Node2D"]
+script = ExtResource( 1 )
+creature_obj = ExtResource( 2 )
+food_obj = ExtResource( 3 )
+
+[node name="grass_background" type="Sprite" parent="."]
+position = Vector2( 512.988, 298.537 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1024, 600 )
+
+[node name="all_walls" type="Node2D" parent="."]
+
+[node name="wall_left" type="StaticBody2D" parent="all_walls"]
+position = Vector2( 0, 300 )
+
+[node name="wall_left_collision" type="CollisionShape2D" parent="all_walls/wall_left"]
+rotation = -1.5708
+scale = Vector2( 3, 1 )
+shape = SubResource( 1 )
+
+[node name="wall_right" type="StaticBody2D" parent="all_walls"]
+position = Vector2( 1024, 300 )
+
+[node name="wall_right_collision" type="CollisionShape2D" parent="all_walls/wall_right"]
+rotation = 1.5708
+scale = Vector2( 3, 1 )
+shape = SubResource( 1 )
+
+[node name="wall_top" type="StaticBody2D" parent="all_walls"]
+position = Vector2( 512, 0 )
+
+[node name="wall_top_collision" type="CollisionShape2D" parent="all_walls/wall_top"]
+scale = Vector2( 5.12, 1 )
+shape = SubResource( 1 )
+
+[node name="wall_bottom" type="StaticBody2D" parent="all_walls"]
+position = Vector2( 512, 600 )
+
+[node name="wall_bottom_collision" type="CollisionShape2D" parent="all_walls/wall_bottom"]
+rotation = -3.14159
+scale = Vector2( 5.12, 1 )
+shape = SubResource( 1 )

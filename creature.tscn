@@ -1,0 +1,88 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://creature.gd" type="Script" id=1]
+[ext_resource path="res://assets/creature_parts/left/creature_left.png" type="Texture" id=2]
+[ext_resource path="res://assets/creature_parts/left/creature_left_run_1.png" type="Texture" id=3]
+[ext_resource path="res://assets/creature_parts/left/creature_left_run_2.png" type="Texture" id=4]
+[ext_resource path="res://assets/creature_parts/front/creature_front.png" type="Texture" id=5]
+[ext_resource path="res://assets/creature_parts/front/creature_front_run_1.png" type="Texture" id=6]
+[ext_resource path="res://assets/creature_parts/front/creature_front_run_2.png" type="Texture" id=7]
+[ext_resource path="res://assets/creature_parts/right/creature_right.png" type="Texture" id=8]
+[ext_resource path="res://assets/creature_parts/right/creature_right_run_1.png" type="Texture" id=9]
+[ext_resource path="res://assets/creature_parts/right/creature_right_run_2.png" type="Texture" id=10]
+[ext_resource path="res://assets/creature_parts/back/creature_back.png" type="Texture" id=11]
+[ext_resource path="res://assets/creature_parts/back/creature_back_run_1.png" type="Texture" id=12]
+[ext_resource path="res://assets/creature_parts/back/creature_back_run_2.png" type="Texture" id=13]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "move_left",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "stationary_left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "move_down",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "move_right",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "stationary_right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "move_up",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "stationary_up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "stationary_down",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 135, 125 )
+
+[node name="creature" type="KinematicBody2D"]
+scale = Vector2( 0.1, 0.1 )
+script = ExtResource( 1 )
+mm_SPEED = Vector2( 50, 250 )
+mm_SIGHT = Vector2( 50, 250 )
+mm_ORIGINAL_HEALTH = Vector2( 4, 13 )
+mm_HEALTHINESS = Vector2( 0.5, 2 )
+mm_MEMORY = Vector2( 3, 15 )
+mm_EXPECTED_OFFSPRING = Vector2( 1, 4 )
+mm_OFFSPRING_SURVIVABILITY = Vector2( 0, 1 )
+mm_MORTALITY = Vector2( 2, 15 )
+mm_MUTATION_RATE = Vector2( 0, 1 )
+
+[node name="creature_animation" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "move_down"
+
+[node name="creature_collision_body" type="CollisionShape2D" parent="."]
+position = Vector2( 0.677319, 0 )
+shape = SubResource( 2 )
+
+[node name="mouse_detection_area" type="Area2D" parent="."]
+
+[node name="mouse_collison_body" type="CollisionShape2D" parent="mouse_detection_area"]
+position = Vector2( 0.677319, 0 )
+shape = SubResource( 2 )
